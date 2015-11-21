@@ -1,64 +1,103 @@
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class DontSleepGUI extends JFrame{
 	private Game game;
-	private Display panel;
+	private Display play;
+	private JPanel menu, win, lose, holder;
+	private JButton start;
 	private Timer timer;
 	private int mode;
+	private CardLayout cards;
 	
 	public DontSleepGUI(){
 		setTitle("Don't Sleep!");
 		setSize(new Dimension(1200, 800));
 		setLocation(300, 100);
-		game = new Game();
-		panel = new Display(game);
+		setupLayout();
 		registerListenersAndObservers();
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		timer = new Timer(100, new TickListener());
-		setMode(1);
 	}
 
 	public static void main (String[] args){
 		new DontSleepGUI();
 	}
 	
+	private void setupLayout() {
+		cards = new CardLayout();
+		holder = new JPanel(cards);
+		
+		game = new Game();
+		play = new Display(game);
+		menu = new JPanel();
+		start = new JButton("Play");
+		menu.add(start);
+		
+		holder.add(menu, "Menu");
+		holder.add(play, "Play");
+		add(holder);
+		
+		timer = new Timer(100, new TickListener());
+		setMode(0);
+		//add(cur);
+	}
+	
 	private void registerListenersAndObservers() {
-		game.addObserver(panel);
+		game.addObserver(play);
 		addKeyListener(new MoveListener());
+		start.addActionListener(new StartListener());
 	}
 	
 	private void setMode(int m){
 		mode = m;
 		if(mode == 0){ //main menu
 			timer.stop();
-			remove(panel);
-			//add main menu
+			//cur = menu;
+			//add(menu);
+			cards.show(holder, "Menu");
 		}
 		else if(mode == 1){ //game
-			add(panel);
+			cards.show(holder, "Play");
+			//cur = play;
+			//this.removeAll();
+			//add(play);
 			timer.start();
 		}
-		else if(mode == 3){ //end
+		else if(mode == 3){ //win
 			timer.stop();
-			remove(panel);
-			//add end screen
+			//cur = win;
 		}
+		else if(mode == 4){ //lose
+			timer.stop();
+			//cur = lose;
+			//add lose screen
+		}
+		this.validate();
 	}
 	
 	private class TickListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			//System.out.println("tick");// test timing
+			System.out.println("tick");// test timing
 			game.updateGame();
+		}
+	}
+	
+	private class StartListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			setMode(1);
 		}
 	}
 	

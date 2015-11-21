@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -33,7 +34,6 @@ public class Display extends JPanel implements Observer {
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		// TODO draw background
 		g2.drawImage(player, game.getPlayerX(), Player.PLAYER_Y, null);
 		ArrayList<Item> items = game.getItems();
 		for (int i = 0; i < items.size(); i++) {
