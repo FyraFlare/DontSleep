@@ -16,7 +16,7 @@ import javax.swing.Timer;
 public class DontSleepGUI extends JFrame{
 	private Game game;
 	private Display play;
-	private JPanel menu, win, lose, holder;
+	private JPanel menu, win, lose, holder, shop;
 	private JButton start;
 	private Timer timer;
 	private int mode;
@@ -26,10 +26,10 @@ public class DontSleepGUI extends JFrame{
 		setTitle("Don't Sleep!");
 		setSize(new Dimension(1200, 810));
 		setLocation(300, 100);
-		setupLayout();
-		registerListenersAndObservers();
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setupLayout();
+		registerListenersAndObservers();
 	}
 
 	public static void main (String[] args){
@@ -39,6 +39,7 @@ public class DontSleepGUI extends JFrame{
 	private void setupLayout() {
 		cards = new CardLayout();
 		holder = new JPanel(cards);
+		
 		menu = new JPanel();
 		start = new JButton("Play");
 		start.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
@@ -47,11 +48,21 @@ public class DontSleepGUI extends JFrame{
 		start.setBounds(550, 350, 100, 50);
 		start.setLocation(new Point(500, 350));
 		menu.setBackground(Color.CYAN);
+		
 		game = new Game();
 		play = new Display(game);
 		
+		shop = new JPanel();
+		
+		lose = new JPanel();
+		
+		win = new JPanel();
+		
 		holder.add(menu, "Menu");
 		holder.add(play, "Play");
+		holder.add(shop, "Shop");
+		holder.add(lose, "Lose");
+		holder.add(win, "Win");
 		add(holder);
 		
 		timer = new Timer(100, new TickListener());
@@ -69,25 +80,23 @@ public class DontSleepGUI extends JFrame{
 		mode = m;
 		if(mode == 0){ //main menu
 			timer.stop();
-			//cur = menu;
-			//add(menu);
 			cards.show(holder, "Menu");
 		}
 		else if(mode == 1){ //game
 			cards.show(holder, "Play");
-			//cur = play;
-			//this.removeAll();
-			//add(play);
 			timer.start();
 		}
-		else if(mode == 3){ //win
+		else if(mode == 2){ //shop
 			timer.stop();
-			//cur = win;
+			cards.show(holder, "Shop");
 		}
-		else if(mode == 4){ //lose
+		else if(mode == 3){ //lose
 			timer.stop();
-			//cur = lose;
-			//add lose screen
+			cards.show(holder, "Lose");
+		}
+		else if(mode == 4){ //win
+			timer.stop();
+			cards.show(holder, "Win");
 		}
 		this.requestFocusInWindow();
 		this.validate();
@@ -98,7 +107,10 @@ public class DontSleepGUI extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			//System.out.println("tick");// test timing
-			game.updateGame();
+			int result = game.updateGame();
+			if(result == 1){
+				setMode(2);
+			}
 		}
 	}
 	
@@ -114,19 +126,26 @@ public class DontSleepGUI extends JFrame{
 		@Override
 		public void keyPressed(KeyEvent key) {
 			if(key.getKeyCode() == KeyEvent.VK_LEFT){
-				game.move(true);
+				game.move(1);
 			}
 			else if(key.getKeyCode() == KeyEvent.VK_RIGHT){
-				game.move(false);
+				game.move(2);
 			}
-			else if(key.getKeyCode() == KeyEvent.VK_M){
-				setMode(0);
+			else if(key.getKeyCode() == KeyEvent.VK_P){
+				if(mode == 0 || mode == 2){
+					setMode(1);
+				}
+				else{
+					setMode(0);
+				}
 			}
 		}
 
 		@Override
-		public void keyReleased(KeyEvent arg0) {
-			// TODO Auto-generated method stub
+		public void keyReleased(KeyEvent key) {
+			if(key.getKeyCode() == KeyEvent.VK_LEFT || key.getKeyCode() == KeyEvent.VK_RIGHT){
+				game.move(0);
+			}
 		}
 
 		@Override
