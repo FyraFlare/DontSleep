@@ -28,6 +28,12 @@ public class Player {
 			move = -move;
 		}
 		x += move;
+		if(x < Game.BAR_WIDTH){
+			x = Game.BAR_WIDTH;
+		}
+		else if(x > 1200 - P_WIDTH){
+			x = 1200 - P_WIDTH;
+		}
 	}
 	
 	public int getX(){

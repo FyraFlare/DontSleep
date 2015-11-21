@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,7 +10,6 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -26,7 +24,7 @@ public class DontSleepGUI extends JFrame{
 	
 	public DontSleepGUI(){
 		setTitle("Don't Sleep!");
-		setSize(new Dimension(1200, 800));
+		setSize(new Dimension(1200, 810));
 		setLocation(300, 100);
 		setupLayout();
 		registerListenersAndObservers();
@@ -120,6 +118,9 @@ public class DontSleepGUI extends JFrame{
 			}
 			else if(key.getKeyCode() == KeyEvent.VK_RIGHT){
 				game.move(false);
+			}
+			else if(key.getKeyCode() == KeyEvent.VK_M){
+				setMode(0);
 			}
 		}
 
