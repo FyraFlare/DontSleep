@@ -9,7 +9,7 @@ public class Player {
 	
 	public Player(){
 		x = 550;
-		speed = 5;
+		speed = 10;
 		status = 0;
 	}
 	

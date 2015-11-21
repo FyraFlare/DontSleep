@@ -25,27 +25,27 @@ public class Game extends Observable{
 	
 	public void updateGame(){
 		int speed = lvl*5;
-		ArrayList<Integer> rem = new ArrayList<Integer>();
+		ArrayList<Item> rem = new ArrayList<Item>();
 		for(int i = 0; i < items.size(); i++){
 			items.get(i).fall(speed);
 			Point p = items.get(i).getPosition();
 			int h = items.get(i).getHeight();
 			int w = items.get(i).getWidth();
-			if(p.y > Player.PLAYER_Y - h && p.y < Player.PLAYER_Y + Player.P_HEIGHT && p.x > Player.P_WIDTH - w && p.x < Player.P_WIDTH + IMG_SIZE){
+			if(p.y > Player.PLAYER_Y - h && p.y < Player.PLAYER_Y + Player.P_HEIGHT && p.x > player.getX() - w && p.x < player.getX() + Player.P_WIDTH){
 				points += items.get(i).getValue();
-				rem.add(i);
+				rem.add(items.get(i));
 			}
 			else if(p.y > Player.PLAYER_Y + Player.P_HEIGHT){
-				rem.add(i);
+				rem.add(items.get(i));
 			}
 		}
 		for(int i = 0; i < rem.size(); i++){
 			items.remove(rem.get(i));
 		}
 		int check = rand.nextInt(100);
-		if(check < 3){
+		if(check < 10){
 			Item temp;
-			if(check >0){
+			if(check >7){
 				temp = new Coffee();
 			}
 			else{

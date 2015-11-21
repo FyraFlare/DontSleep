@@ -82,6 +82,7 @@ public class DontSleepGUI extends JFrame{
 			//cur = lose;
 			//add lose screen
 		}
+		this.requestFocusInWindow();
 		this.validate();
 	}
 	
@@ -89,7 +90,7 @@ public class DontSleepGUI extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			System.out.println("tick");// test timing
+			//System.out.println("tick");// test timing
 			game.updateGame();
 		}
 	}
