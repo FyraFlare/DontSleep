@@ -26,14 +26,15 @@ public class Display extends JPanel implements Observer {
 		try {
 			background = ImageIO.read(new File("./images/background.png"));
 			player = ImageIO.read(new File("./images/purple.png"));
-			coffee = ImageIO.read(new File("./images/orange.png"));
-			pillow = ImageIO.read(new File("./images/gray.png"));
+			coffee = ImageIO.read(new File("./images/coffee_cup.png"));
+			pillow = ImageIO.read(new File("./images/pillow_case.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(background, 0, 0, null);
 		g2.drawImage(player, game.getPlayerX(), Player.PLAYER_Y, null);

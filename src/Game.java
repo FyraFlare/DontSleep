@@ -45,7 +45,7 @@ public class Game extends Observable{
 		int check = rand.nextInt(100);
 		if(check < 10){
 			Item temp;
-			if(check >7){
+			if(check >4){
 				temp = new Coffee();
 			}
 			else{
