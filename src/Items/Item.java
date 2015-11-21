@@ -8,9 +8,9 @@ public class Item {
 	int w, h;
 	int val;
 	
-	public Item(int value, int xPosition, int width, int height){
+	public Item(int value, int width, int height){
 		val = value;
-		x = xPosition;
+		x = 0;
 		y = 0;
 		w = width;
 		h = height;
@@ -26,6 +26,10 @@ public class Item {
 	
 	public void fall(int dist){
 		y = y+dist;
+	}
+	
+	public void setX(int xPosition){
+		x = xPosition;
 	}
 	
 	public int getHeight(){

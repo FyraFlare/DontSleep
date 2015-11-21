@@ -3,26 +3,23 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
 
-import Items.Item;
+import Items.*;
 
 public class Game extends Observable{
 	int caf;
-	int player;
+	Player player;
 	int points;
 	int lvl;
 	ArrayList<Item> items;
 	private static final int IMG_SIZE = 50;
-	public static final int PlAYER_Y = 700;
-	int speed;
 	Random rand;
 	
 	public Game(){
 		caf = 10;
-		player = 550;
+		player = new Player();
 		points = 0;
 		lvl = 1;
 		items = new ArrayList<Item>();
-		speed = 5;
 		rand = new Random();
 	}
 	
@@ -34,11 +31,11 @@ public class Game extends Observable{
 			Point p = items.get(i).getPosition();
 			int h = items.get(i).getHeight();
 			int w = items.get(i).getWidth();
-			if(p.y > PlAYER_Y - h && p.y < PlAYER_Y + IMG_SIZE && p.x > player - w && p.x < player + IMG_SIZE){
+			if(p.y > Player.PLAYER_Y - h && p.y < Player.PLAYER_Y + Player.P_HEIGHT && p.x > Player.P_WIDTH - w && p.x < Player.P_WIDTH + IMG_SIZE){
 				points += items.get(i).getValue();
 				rem.add(i);
 			}
-			else if(p.y > PlAYER_Y + IMG_SIZE){
+			else if(p.y > Player.PLAYER_Y + Player.P_HEIGHT){
 				rem.add(i);
 			}
 		}
@@ -46,28 +43,34 @@ public class Game extends Observable{
 			items.remove(rem.get(i));
 		}
 		int check = rand.nextInt(100);
-		if(check < 2){
-			//TODO pick item type
-			Item temp = new Item(5, check, IMG_SIZE, IMG_SIZE);
+		if(check < 3){
+			Item temp;
+			if(check >0){
+				temp = new Coffee();
+			}
+			else{
+				temp = new Pillow();
+			}
 			check = rand.nextInt(1200-temp.getWidth());
+			temp.setX(check);
 			items.add(temp);
+		}
+		caf--;
+		if(caf < 1){
+			//TODO you lose
 		}
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
 	public void move(boolean left){
-		int move = speed;
-		if(left){
-			move = -move;
-		}
-		player += move;
+		player.move(left);
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
-	public int getPlayer(){
-		return player;
+	public int getPlayerX(){
+		return player.getX();
 	}
 	
 	public ArrayList<Item> getItems(){
