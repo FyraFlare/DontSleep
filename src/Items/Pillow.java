@@ -2,6 +2,6 @@ package Items;
 
 public class Pillow extends Item{
 	public Pillow() {
-		super(5, 50, 50);
+		super(-20, 116, 81);
 	}
 }

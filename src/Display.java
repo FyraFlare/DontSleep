@@ -15,7 +15,7 @@ import Items.*;
 
 public class Display extends JPanel implements Observer {
 	private Game game;
-	private Image background, player, coffee, pillow;
+	private Image background, hyperBar, player, coffee, pillow;
 
 	public Display(Game g) {
 		loadImages();
@@ -25,17 +25,21 @@ public class Display extends JPanel implements Observer {
 	private void loadImages() {
 		try {
 			background = ImageIO.read(new File("./images/background.png"));
+			hyperBar = ImageIO.read(new File("./images/hyper_bar.png"));
 			player = ImageIO.read(new File("./images/purple.png"));
-			coffee = ImageIO.read(new File("./images/orange.png"));
-			pillow = ImageIO.read(new File("./images/gray.png"));
+			coffee = ImageIO.read(new File("./images/coffee_cup.png"));
+			pillow = ImageIO.read(new File("./images/pillow_case.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(background, 0, 0, null);
+		g2.fillRect(3, 751-game.getCaf(), 50, game.getCaf());
+		g2.drawImage(hyperBar, 0, 0, null);
 		g2.drawImage(player, game.getPlayerX(), Player.PLAYER_Y, null);
 		ArrayList<Item> items = game.getItems();
 		for (int i = 0; i < items.size(); i++) {

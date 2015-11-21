@@ -2,6 +2,6 @@ package Items;
 
 public class Coffee extends Item{
 	public Coffee() {
-		super(5, 50, 50);
+		super(10, 78, 62);
 	}
 }
