@@ -20,7 +20,7 @@ public class DontSleepGUI extends JFrame{
 		registerListenersAndObservers();
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		timer = new Timer(1000, new TickListener());
+		timer = new Timer(100, new TickListener());
 		timer.start();
 	}
 
@@ -43,7 +43,7 @@ public class DontSleepGUI extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			//System.out.println("tick"); test timing
+			//System.out.println("tick");// test timing
 			game.updateGame();
 		}
 	}
