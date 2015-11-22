@@ -48,8 +48,8 @@ public class Game extends Observable {
 				rem.add(items.get(i));
 			} else if (p.y > Player.PLAYER_Y + Player.P_HEIGHT) {
 				rem.add(items.get(i));
-				if(rand.nextInt(10) < 1){
-					spils.add(new Splatter(0));
+				if(items.get(i).getValue() > 1 && rand.nextInt(2) < 1){
+					spils.add(new Splatter(rand.nextInt(3)));
 				}
 			}
 		}
