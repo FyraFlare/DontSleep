@@ -21,7 +21,7 @@ import Model.Splatter;
 
 public class Display extends JPanel implements Observer {
 	private Game game;
-	private Image background, hyperBar, player, gift, coffee, mug, press, tea, sugar, soda, chocolate, cream, pillow, blanket, lullaby, cap, paper, text, spil1;
+	private Image background, hyperBar, player, gift, coffee, mug, press, tea, sugar, soda, chocolate, cream, pillow, blanket, lullaby, cap, paper, text, spill0, spill1, spill2;
 	int mes;
 
 	public Display(Game g) {
@@ -50,6 +50,9 @@ public class Display extends JPanel implements Observer {
 			cap = ImageIO.read(new File("./images/night_cap.png"));
 			paper = ImageIO.read(new File("./images/paperwork.png"));
 			text = ImageIO.read(new File("./images/textbook.png"));
+			spill0 = ImageIO.read(new File("./images/coffee_spill.png"));
+			spill1 = ImageIO.read(new File("./images/coffee_spill1.png"));
+			spill2 = ImageIO.read(new File("./images/coffee_spill2.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -104,7 +107,15 @@ public class Display extends JPanel implements Observer {
 		g2.drawString(gifts, 1000, 50);
 		ArrayList<Splatter> spils = game.getSpils();
 		for(int i = 0; i < spils.size(); i++){
-			//g2.drawImage(spil1, 0, 0, null);
+			if(spils.get(i).getType() == 0){
+				g2.drawImage(spill0, 0, 0, null);
+			}
+			else if(spils.get(i).getType() == 1){
+				g2.drawImage(spill1, 0, 0, null);
+			}
+			else if(spils.get(i).getType() == 2){
+				g2.drawImage(spill2, 0, 0, null);
+			}
 		}
 		if (mes != 0) {
 			String temp;

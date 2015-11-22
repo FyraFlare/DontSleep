@@ -5,7 +5,7 @@ public class Splatter {
 	private int type;
 	
 	public Splatter(int pattern){
-		counter = 40;
+		counter = 80;
 		type = pattern;
 	}
 	
@@ -15,5 +15,9 @@ public class Splatter {
 			return false;
 		}
 		return true;
+	}
+	
+	public int getType(){
+		return type;
 	}
 }
