@@ -184,8 +184,7 @@ public class DontSleepGUI extends JFrame{
 		@Override
 		public void mouseReleased(MouseEvent mouse) {
 			if(mouse.getX() > 370 && mouse.getX() < 705){
-				int temp = (mouse.getX()-370)/335 + 1;
-				game.buy(temp);
+				game.buy((mouse.getY()-250)/100);
 			}
 			else if(mouse.getX() > 820 && mouse.getX() < 1055 && mouse.getY() > 610 && mouse.getY() < 1052){
 				setMode(1);

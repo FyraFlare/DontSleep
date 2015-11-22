@@ -1,22 +1,15 @@
 package View;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import Items.Coffee;
-import Items.Gift;
-import Items.Item;
-import Items.Pillow;
 import Model.Game;
-import Model.Player;
 
 public class Shop extends JPanel{
 	private Game game;

@@ -9,6 +9,7 @@ import Items.*;
 public class Game extends Observable {
 	public static int BAR_WIDTH = 69;
 	ArrayList<Item> items;
+	Upgrade[] upgrades;
 	Random rand;
 	Player player;
 	int gifts;
@@ -23,6 +24,7 @@ public class Game extends Observable {
 		gifts = 0;
 		lvl = 0;
 		nextlvl();
+		setUpgrades();
 	}
 
 	public int updateGame(){
@@ -103,6 +105,10 @@ public class Game extends Observable {
 			temp.setX(check + BAR_WIDTH);
 			items.add(temp);
 		}
+	}
+	
+	private void setUpgrades(){
+		upgrades = new Upgrade[5];
 	}
 	
 	public void buy(int b){
