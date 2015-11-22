@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,8 +50,7 @@ public class DontSleepGUI extends JFrame{
 		start.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
 		menu.setLayout(null);
 		menu.add(start);
-		start.setBounds(550, 350, 100, 50);
-		start.setLocation(new Point(500, 350));
+		start.setBounds(525, 350, 100, 50);
 		menu.setBackground(Color.CYAN);
 		
 		game = new Game();
@@ -69,7 +70,7 @@ public class DontSleepGUI extends JFrame{
 		add(holder);
 		
 		timer = new Timer(100, new TickListener());
-		setMode(0);
+		setMode(2);
 		//add(cur);
 	}
 	
@@ -77,6 +78,7 @@ public class DontSleepGUI extends JFrame{
 		game.addObserver(play);
 		addKeyListener(new MoveListener());
 		start.addActionListener(new StartListener());
+		shop.addMouseListener(new buyListener());
 	}
 	
 	private void setMode(int m){
@@ -155,5 +157,40 @@ public class DontSleepGUI extends JFrame{
 		public void keyTyped(KeyEvent arg0) {
 			// TODO Auto-generated method stub
 		}
+	}
+	
+	private class buyListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent mouse) {
+			if(mouse.getX() > 370 && mouse.getX() < 705){
+				int temp = (mouse.getX()-370)/335 + 1;
+				game.buy(temp);
+			}
+			else if(mouse.getX() > 820 && mouse.getX() < 1055 && mouse.getY() > 610 && mouse.getY() < 1052){
+				setMode(1);
+			}
+		}
+		
 	}
 }

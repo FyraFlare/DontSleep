@@ -3,8 +3,8 @@ package Model;
 public class Player {
 	private int x;
 	public static final int PLAYER_Y = 610;
-	public static final int P_WIDTH = 121;
-	public static final int P_HEIGHT = 153;
+	public static final int P_WIDTH = 75;
+	public static final int P_HEIGHT = 119;
 	private int speed;
 	private int cafBoost;
 	private int awake;

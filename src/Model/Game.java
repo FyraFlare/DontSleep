@@ -104,6 +104,10 @@ public class Game extends Observable {
 			items.add(temp);
 		}
 	}
+	
+	public void buy(int b){
+		System.out.println("Buy upgrade " + b);
+	}
 
 	public void move(int m) {
 		move = m;
