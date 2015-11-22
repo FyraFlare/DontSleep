@@ -18,7 +18,7 @@ import Model.Game;
 public class DontSleepGUI extends JFrame{
 	private Game game;
 	private Display play;
-	private JPanel menu, end, holder, shop;
+	private JPanel menu, end, holder, shop, inst;
 	private JButton start;
 	private Timer timer;
 	private int mode;
@@ -59,13 +59,16 @@ public class DontSleepGUI extends JFrame{
 		
 		end = new GameOver(game);
 		
+		inst = new Instructions();
+		
 		holder.add(menu, "Menu");
 		holder.add(play, "Play");
 		holder.add(shop, "Shop");
 		holder.add(end, "End");
+		holder.add(inst, "Inst");
 		add(holder);
 		
-		timer = new Timer(50, new TickListener());
+		timer = new Timer(25, new TickListener());
 		freeze = 0;
 		setMode(0);
 	}
@@ -94,6 +97,10 @@ public class DontSleepGUI extends JFrame{
 			timer.stop();
 			cards.show(holder, "End");
 		}
+		else if(mode == 4){ //instructions
+			timer.stop();
+			cards.show(holder, "Inst");
+		}
 		this.requestFocusInWindow();
 		this.validate();
 	}
@@ -106,7 +113,7 @@ public class DontSleepGUI extends JFrame{
 				int result = game.updateGame();
 				if(result > 0){
 					play.setMes(result);
-					freeze = 30;
+					freeze = 70;
 					if(result > 1){
 						next = 3;
 					}
@@ -114,7 +121,7 @@ public class DontSleepGUI extends JFrame{
 				}
 				else if(result < 0){
 					play.setMes(result);
-					freeze = 30;
+					freeze = 70;
 					next = 3;
 				}
 			}
@@ -145,17 +152,20 @@ public class DontSleepGUI extends JFrame{
 				game.move(0);
 			}
 			else if(key.getKeyCode() == KeyEvent.VK_P){
-				if(mode == 0 || mode == 2){
-					setMode(1);
-				}
-				else{
+				if(mode == 1){
 					setMode(0);
 				}
-			}
-			else if(key.getKeyCode() == KeyEvent.VK_R){
-				if(mode == 3){
+				else if(mode == 3){
 					game.reset();
 					setMode(0);
+				}
+				else{
+					setMode(1);
+				}
+			}
+			else if(key.getKeyCode() == KeyEvent.VK_I){
+				if(mode == 0){
+					setMode(4);
 				}
 			}
 		}

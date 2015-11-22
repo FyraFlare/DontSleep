@@ -17,10 +17,11 @@ import javax.swing.JPanel;
 import Items.*;
 import Model.Game;
 import Model.Player;
+import Model.Splatter;
 
 public class Display extends JPanel implements Observer {
 	private Game game;
-	private Image background, hyperBar, player, gift, coffee, mug, press, tea, sugar, soda, chocolate, cream, pillow, blanket, lullaby, cap, paper, text;
+	private Image background, hyperBar, player, gift, coffee, mug, press, tea, sugar, soda, chocolate, cream, pillow, blanket, lullaby, cap, paper, text, spil1;
 	int mes;
 
 	public Display(Game g) {
@@ -101,6 +102,10 @@ public class Display extends JPanel implements Observer {
 		g2.setColor(Color.WHITE);
 		g2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		g2.drawString(gifts, 1000, 50);
+		ArrayList<Splatter> spils = game.getSpils();
+		for(int i = 0; i < spils.size(); i++){
+			//g2.drawImage(spil1, 0, 0, null);
+		}
 		if (mes != 0) {
 			String temp;
 			if (mes < 0) {

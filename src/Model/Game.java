@@ -9,6 +9,7 @@ import Items.*;
 public class Game extends Observable {
 	public static int BAR_WIDTH = 69;
 	private ArrayList<Item> items;
+	private ArrayList<Splatter> spils;
 	private Upgrade[] upgrades;
 	private Random rand;
 	private Player player;
@@ -24,7 +25,7 @@ public class Game extends Observable {
 	}
 
 	public int updateGame(){
-		int speed = lvl * 5;
+		int speed = lvl * 2;
 		if(move == 1){
 			player.move(true);
 		}
@@ -47,14 +48,26 @@ public class Game extends Observable {
 				rem.add(items.get(i));
 			} else if (p.y > Player.PLAYER_Y + Player.P_HEIGHT) {
 				rem.add(items.get(i));
+				if(rand.nextInt(10) < 1){
+					spils.add(new Splatter(0));
+				}
 			}
 		}
 		for (int i = 0; i < rem.size(); i++) {
 			items.remove(rem.get(i));
 		}
+		ArrayList<Splatter> clean = new ArrayList<Splatter>();
+		for (int i = 0; i < spils.size(); i++) {
+			if(spils.get(i).countdown()){
+				clean.add(spils.get(i));
+			}
+		}
+		for (int i = 0; i < clean.size(); i++) {
+			spils.remove(clean.get(i));
+		}
 		genItem();
 		counter++;
-		if (counter > 4) {
+		if (counter > 12) {
 			int temp = 1 + lvl - player.getAwake();
 			caf-= temp;
 			counter = 0;
@@ -80,6 +93,7 @@ public class Game extends Observable {
 		counter = 0;
 		move = 0;
 		items = new ArrayList<Item>();
+		spils = new ArrayList<Splatter>();
 		Item temp = new Coffee();
 		int check = rand.nextInt(1200 - temp.getWidth() - BAR_WIDTH);
 		temp.setX(check + BAR_WIDTH);
@@ -88,7 +102,7 @@ public class Game extends Observable {
 	
 	private void genItem(){
 		int check = rand.nextInt(100);
-		if (check < 5 || items.isEmpty()) {
+		if (check < 2 || items.isEmpty()) {
 			Item temp;
 			check = rand.nextInt(100);
 			if (check < 5) {
@@ -144,11 +158,11 @@ public class Game extends Observable {
 	
 	private void setUpgrades(){
 		upgrades = new Upgrade[5];
-		upgrades[0] = new Upgrade(3, 4);
-		upgrades[1] = new Upgrade(2, 2);
-		upgrades[2] = new Upgrade(2, 5);
-		upgrades[3] = new Upgrade(1, 7);
-		upgrades[4] = new Upgrade(1, 15);
+		upgrades[0] = new Upgrade(3, 3);
+		upgrades[1] = new Upgrade(4, 4);
+		upgrades[2] = new Upgrade(2, 4);
+		upgrades[3] = new Upgrade(1, 6);
+		upgrades[4] = new Upgrade(1, 12);
 	}
 	
 	public void buy(int b){
@@ -181,6 +195,10 @@ public class Game extends Observable {
 
 	public ArrayList<Item> getItems() {
 		return items;
+	}
+	
+	public ArrayList<Splatter> getSpils() {
+		return spils;
 	}
 	
 	public int getGifts(){
