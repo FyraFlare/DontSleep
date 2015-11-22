@@ -1,4 +1,6 @@
 package View;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -7,7 +9,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,12 +25,10 @@ public class DontSleepGUI extends JFrame{
 	private Game game;
 	private Display play;
 	private JPanel menu, end, holder, shop, inst;
-	private JButton start;
 	private Timer timer;
 	private int mode;
 	private CardLayout cards;
-	int freeze;
-	int next;
+	private int next;
 	
 	public DontSleepGUI(){
 		setTitle("Don't Sleep!");
@@ -34,6 +38,7 @@ public class DontSleepGUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupLayout();
 		registerListenersAndObservers();
+		playBGM();
 	}
 
 	public static void main (String[] args){
@@ -44,21 +49,11 @@ public class DontSleepGUI extends JFrame{
 		cards = new CardLayout();
 		holder = new JPanel(cards);
 		
-		menu = new Menu();/*
-		start = new JButton("Play");
-		start.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
-		menu.setLayout(null);
-		menu.add(start);
-		start.setBounds(525, 350, 100, 50);
-		menu.setBackground(Color.CYAN);*/
-		
+		menu = new Menu();
 		game = new Game();
 		play = new Display(game);
-		
 		shop = new Shop(game);
-		
 		end = new GameOver(game);
-		
 		inst = new Instructions();
 		
 		holder.add(menu, "Menu");
@@ -69,7 +64,6 @@ public class DontSleepGUI extends JFrame{
 		add(holder);
 		
 		timer = new Timer(25, new TickListener());
-		freeze = 0;
 		setMode(0);
 	}
 	
@@ -105,7 +99,21 @@ public class DontSleepGUI extends JFrame{
 		this.validate();
 	}
 	
+	private void playBGM(){
+		try {
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("./music/During_the_game_change_speed.wav"));
+	         // Get a sound clip resource.
+	         Clip bgm = AudioSystem.getClip();
+	         // Open audio clip and load samples from the audio input stream.
+	         bgm.open(audioIn);
+	         bgm.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+	
 	private class TickListener implements ActionListener{
+		private int freeze = 0;
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
