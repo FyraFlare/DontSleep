@@ -1,9 +1,9 @@
 package Model;
 
 public class Upgrade {
-	int bought;
-	int max;
-	int cost;
+	private int bought;
+	private int max;
+	private int cost;
 	
 	public Upgrade(int most, int price){
 		max = most;
@@ -13,7 +13,8 @@ public class Upgrade {
 	public int buy(int gifts){
 		if(bought < max && cost <= gifts){
 			bought++;
-			return gifts-cost;
+			cost++;
+			return gifts-cost-1;
 		}
 		return gifts;
 	}
@@ -23,5 +24,9 @@ public class Upgrade {
 			return false;
 		}
 		return true;
+	}
+	
+	public int cost(){
+		return cost;
 	}
 }

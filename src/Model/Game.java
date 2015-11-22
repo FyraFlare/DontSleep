@@ -8,15 +8,15 @@ import Items.*;
 
 public class Game extends Observable {
 	public static int BAR_WIDTH = 69;
-	ArrayList<Item> items;
-	Upgrade[] upgrades;
-	Random rand;
-	Player player;
-	int gifts;
-	int lvl;
-	int caf;
-	int counter;
-	int move;
+	private ArrayList<Item> items;
+	private Upgrade[] upgrades;
+	private Random rand;
+	private Player player;
+	private int gifts;
+	private int lvl;
+	private int caf;
+	private int counter;
+	private int move;
 
 	public Game() {
 		rand = new Random();
@@ -67,6 +67,9 @@ public class Game extends Observable {
 			}
 			if (caf >= 737){
 				nextlvl();
+				if(lvl > 6){
+					return 2;
+				}
 				return 1;
 			}
 		}
@@ -138,5 +141,21 @@ public class Game extends Observable {
 
 	public ArrayList<Item> getItems() {
 		return items;
+	}
+	
+	public int getGifts(){
+		return gifts;
+	}
+	
+	public boolean maxed(int upgrade){
+		return upgrades[upgrade].maxed();
+	}
+	
+	public int uCost(int upgrade){
+		return upgrades[upgrade].cost();
+	}
+	
+	public int getlvl(){
+		return lvl;
 	}
 }
