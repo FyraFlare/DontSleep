@@ -20,7 +20,7 @@ import Model.Player;
 
 public class Display extends JPanel implements Observer {
 	private Game game;
-	private Image background, hyperBar, player, gift, coffee, pillow;
+	private Image background, hyperBar, player, gift, coffee, mug, press, pillow;
 	int mes;
 
 	public Display(Game g) {
@@ -36,6 +36,8 @@ public class Display extends JPanel implements Observer {
 			player = ImageIO.read(new File("./images/player.png"));
 			gift = ImageIO.read(new File("./images/gift_card.png"));
 			coffee = ImageIO.read(new File("./images/coffee_cup.png"));
+			mug = ImageIO.read(new File("./images/coffee_mug.png"));
+			press = ImageIO.read(new File("./images/coffee_press.png"));
 			pillow = ImageIO.read(new File("./images/pillow_case.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -57,10 +59,18 @@ public class Display extends JPanel implements Observer {
 				g2.drawImage(gift, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
 			} else if (items.get(i) instanceof Coffee) {
 				g2.drawImage(coffee, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Mug) {
+				g2.drawImage(mug, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Press) {
+				g2.drawImage(press, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
 			} else if (items.get(i) instanceof Pillow) {
 				g2.drawImage(pillow, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
 			}
 		}
+		String gifts = "Gift Cards: " + game.getGifts();
+		g2.setColor(Color.WHITE);
+		g2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+		g2.drawString(gifts, 1000, 50);
 		if (mes != 0) {
 			String temp;
 			if (mes < 0) {

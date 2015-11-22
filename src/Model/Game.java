@@ -98,7 +98,13 @@ public class Game extends Observable {
 			if (check < 5) {
 				temp = new Gift();
 			}
-			else if (check > 50) {
+			else if(upgrades[4].maxed() && check < 10){
+				temp = new Press();
+			}
+			else if(upgrades[3].maxed() && check < 15){
+				temp = new Mug();
+			}
+			else if (check < 50) {
 				temp = new Coffee();
 			}
 			else {
