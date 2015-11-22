@@ -11,7 +11,7 @@ public class Player {
 	
 	public Player(){
 		x = 550;
-		speed = 20;
+		speed = 10;
 		cafBoost = 0;
 		awake = 0;
 	}
@@ -35,7 +35,7 @@ public class Player {
 			cafBoost += 20;
 		}
 		else if (i == 1){
-			speed += 5;
+			speed += 3;
 		}
 		else if(i == 5){
 			awake++;

@@ -28,7 +28,7 @@ public class Game extends Observable {
 	}
 
 	public int updateGame(){
-		int speed = lvl * 10;
+		int speed = lvl * 5;
 		if(move == 1){
 			player.move(true);
 		}
@@ -58,7 +58,7 @@ public class Game extends Observable {
 		}
 		genItem();
 		counter++;
-		if (counter > 2) {
+		if (counter > 4) {
 			int temp = 1 + lvl - player.getAwake();
 			caf-= temp;
 			counter = 0;
@@ -80,7 +80,7 @@ public class Game extends Observable {
 	
 	private void nextlvl(){
 		lvl++;
-		caf = 50 + player.getCafBoost();
+		caf = 70 + player.getCafBoost();
 		counter = 0;
 		move = 0;
 		items = new ArrayList<Item>();
@@ -92,7 +92,7 @@ public class Game extends Observable {
 	
 	private void genItem(){
 		int check = rand.nextInt(100);
-		if (check < 10) {
+		if (check < 5 || items.isEmpty()) {
 			Item temp;
 			check = rand.nextInt(100);
 			if (check < 5) {
@@ -104,11 +104,41 @@ public class Game extends Observable {
 			else if(upgrades[3].maxed() && check < 15){
 				temp = new Mug();
 			}
-			else if (check < 50) {
-				temp = new Coffee();
+			else if(lvl > 5 && check > 95){
+				temp = new Text();
+			}
+			else if(lvl > 1 && check > 85){
+				temp = new Blanket();
+			}
+			else if(lvl > 3 && check > 80){
+				temp = new Cap();
+			}
+			else if(lvl > 2 && check > 70){
+				temp = new Lullaby();
+			}
+			else if(lvl > 4 && check > 65){
+				temp = new Paper();
+			}
+			else if (check > 55) {
+				temp = new Pillow();
+			}
+			else if(lvl > 5 && check > 50){
+				temp = new Cream();
+			}
+			else if(lvl > 3 && check > 45){
+				temp = new Soda();
+			}
+			else if(lvl > 4 && check > 40){
+				temp = new Chocolate();
+			}
+			else if(lvl > 1 && check > 35){
+				temp = new Tea();
+			}
+			else if(lvl > 2 && check > 25){
+				temp = new Sugar();
 			}
 			else {
-				temp = new Pillow();
+				temp = new Coffee();
 			}
 			check = rand.nextInt(1200 - temp.getWidth() - BAR_WIDTH);
 			temp.setX(check + BAR_WIDTH);
@@ -118,11 +148,11 @@ public class Game extends Observable {
 	
 	private void setUpgrades(){
 		upgrades = new Upgrade[5];
-		upgrades[0] = new Upgrade(3, 5);
-		upgrades[1] = new Upgrade(2, 4);
-		upgrades[2] = new Upgrade(2, 6);
-		upgrades[3] = new Upgrade(1, 2);
-		upgrades[4] = new Upgrade(1, 4);
+		upgrades[0] = new Upgrade(3, 4);
+		upgrades[1] = new Upgrade(2, 2);
+		upgrades[2] = new Upgrade(2, 5);
+		upgrades[3] = new Upgrade(1, 7);
+		upgrades[4] = new Upgrade(1, 15);
 	}
 	
 	public void buy(int b){

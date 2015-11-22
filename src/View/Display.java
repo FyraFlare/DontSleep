@@ -20,7 +20,7 @@ import Model.Player;
 
 public class Display extends JPanel implements Observer {
 	private Game game;
-	private Image background, hyperBar, player, gift, coffee, mug, press, pillow;
+	private Image background, hyperBar, player, gift, coffee, mug, press, tea, sugar, soda, chocolate, cream, pillow, blanket, lullaby, cap, paper, text;
 	int mes;
 
 	public Display(Game g) {
@@ -38,7 +38,17 @@ public class Display extends JPanel implements Observer {
 			coffee = ImageIO.read(new File("./images/coffee_cup.png"));
 			mug = ImageIO.read(new File("./images/coffee_mug.png"));
 			press = ImageIO.read(new File("./images/coffee_press.png"));
+			tea = ImageIO.read(new File("./images/tea_mug.png"));
+			sugar = ImageIO.read(new File("./images/sugar_can.png"));
+			soda = ImageIO.read(new File("./images/cola_bottle.png"));
+			chocolate = ImageIO.read(new File("./images/hersheys_kiss.png"));
+			cream = ImageIO.read(new File("./images/ice_cream_cone.png"));
 			pillow = ImageIO.read(new File("./images/pillow_case.png"));
+			blanket = ImageIO.read(new File("./images/blanket.png"));
+			lullaby = ImageIO.read(new File("./images/musical_note.png"));
+			cap = ImageIO.read(new File("./images/night_cap.png"));
+			paper = ImageIO.read(new File("./images/paperwork.png"));
+			text = ImageIO.read(new File("./images/textbook.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -63,8 +73,28 @@ public class Display extends JPanel implements Observer {
 				g2.drawImage(mug, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
 			} else if (items.get(i) instanceof Press) {
 				g2.drawImage(press, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Tea) {
+				g2.drawImage(tea, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Sugar) {
+				g2.drawImage(sugar, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Soda) {
+				g2.drawImage(soda, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Chocolate) {
+				g2.drawImage(chocolate, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Cream) {
+				g2.drawImage(cream, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
 			} else if (items.get(i) instanceof Pillow) {
 				g2.drawImage(pillow, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Blanket) {
+				g2.drawImage(blanket, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Lullaby) {
+				g2.drawImage(lullaby, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Cap) {
+				g2.drawImage(cap, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Paper) {
+				g2.drawImage(paper, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
+			} else if (items.get(i) instanceof Text) {
+				g2.drawImage(text, items.get(i).getPosition().x, items.get(i).getPosition().y, null);
 			}
 		}
 		String gifts = "Gift Cards: " + game.getGifts();
