@@ -26,7 +26,7 @@ public class Display extends JPanel implements Observer {
 		try {
 			background = ImageIO.read(new File("./images/background.png"));
 			hyperBar = ImageIO.read(new File("./images/hyper_bar.png"));
-			player = ImageIO.read(new File("./images/purple.png"));
+			player = ImageIO.read(new File("./images/player.png"));
 			gift = ImageIO.read(new File("./images/gift_card.png"));
 			coffee = ImageIO.read(new File("./images/coffee_cup.png"));
 			pillow = ImageIO.read(new File("./images/pillow_case.png"));

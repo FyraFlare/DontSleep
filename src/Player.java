@@ -1,9 +1,9 @@
 
 public class Player {
 	private int x;
-	public static final int PLAYER_Y = 700;
-	public static final int P_WIDTH = 50;
-	public static final int P_HEIGHT = 50;
+	public static final int PLAYER_Y = 610;
+	public static final int P_WIDTH = 121;
+	public static final int P_HEIGHT = 153;
 	private int speed;
 	private int cafBoost;
 	private int awake;
