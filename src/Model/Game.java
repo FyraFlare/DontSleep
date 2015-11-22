@@ -20,11 +20,7 @@ public class Game extends Observable {
 
 	public Game() {
 		rand = new Random();
-		player = new Player();
-		gifts = 0;
-		lvl = 0;
-		nextlvl();
-		setUpgrades();
+		reset();
 	}
 
 	public int updateGame(){
@@ -161,6 +157,14 @@ public class Game extends Observable {
 			player.upgrade(b);
 		}
 		gifts = temp;
+	}
+	
+	public void reset() {
+		player = new Player();
+		gifts = 0;
+		lvl = 0;
+		nextlvl();
+		setUpgrades();
 	}
 
 	public void move(int m) {

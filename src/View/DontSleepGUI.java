@@ -152,6 +152,12 @@ public class DontSleepGUI extends JFrame{
 					setMode(0);
 				}
 			}
+			else if(key.getKeyCode() == KeyEvent.VK_R){
+				if(mode == 3){
+					game.reset();
+					setMode(0);
+				}
+			}
 		}
 
 		@Override
