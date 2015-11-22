@@ -1,16 +1,20 @@
 
 public class Player {
 	private int x;
-	public static final int PLAYER_Y = 700;
-	public static final int P_WIDTH = 50;
-	public static final int P_HEIGHT = 50;
+	public static final int PLAYER_Y = 610;
+	public static final int P_WIDTH = 121;
+	public static final int P_HEIGHT = 153;
 	private int speed;
+	private int cafBoost;
+	private int awake;
 	private int status;
 	
 	public Player(){
 		x = 550;
-		speed = 10;
+		speed = 20;
 		status = 0;
+		cafBoost = 0;
+		awake = 0;
 	}
 	
 	public void move(boolean left){
@@ -42,5 +46,13 @@ public class Player {
 	
 	public void setStatus(int s){
 		status = s;
+	}
+	
+	public int getCafBoost(){
+		return cafBoost;
+	}
+	
+	public int getAwake(){
+		return awake;
 	}
 }
