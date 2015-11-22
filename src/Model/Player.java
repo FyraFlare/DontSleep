@@ -32,13 +32,13 @@ public class Player {
 	
 	public void upgrade(int i) {
 		if(i == 0){
-			cafBoost += 20;
+			cafBoost += 40;
 		}
 		else if (i == 1){
 			speed += 4;
 		}
-		else if(i == 5){
-			awake++;
+		else if(i == 2){
+			awake+= 1;
 		}
 	}
 	

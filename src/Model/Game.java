@@ -69,6 +69,9 @@ public class Game extends Observable {
 		counter++;
 		if (counter > 12) {
 			int temp = 1 + lvl - player.getAwake();
+			if(temp < 1){
+				temp = 1;
+			}
 			caf-= temp;
 			counter = 0;
 			if (caf < 1) {
@@ -158,11 +161,11 @@ public class Game extends Observable {
 	
 	private void setUpgrades(){
 		upgrades = new Upgrade[5];
-		upgrades[0] = new Upgrade(3, 3);
+		upgrades[0] = new Upgrade(4, 3);
 		upgrades[1] = new Upgrade(4, 4);
-		upgrades[2] = new Upgrade(2, 4);
-		upgrades[3] = new Upgrade(1, 6);
-		upgrades[4] = new Upgrade(1, 12);
+		upgrades[2] = new Upgrade(4, 4);
+		upgrades[3] = new Upgrade(1, 5);
+		upgrades[4] = new Upgrade(1, 10);
 	}
 	
 	public void buy(int b){

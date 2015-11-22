@@ -13,8 +13,8 @@ public class Upgrade {
 	public int buy(int gifts){
 		if(bought < max && cost <= gifts){
 			bought++;
-			cost+= 2;
-			return gifts-cost+2;
+			cost+= 1;
+			return gifts-cost+1;
 		}
 		return gifts;
 	}

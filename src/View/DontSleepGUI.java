@@ -122,10 +122,10 @@ public class DontSleepGUI extends JFrame{
 				if(result > 0){
 					play.setMes(result);
 					freeze = 70;
+					next = 2;
 					if(result > 1){
 						next = 3;
 					}
-					next = 2;
 				}
 				else if(result < 0){
 					play.setMes(result);
@@ -174,6 +174,11 @@ public class DontSleepGUI extends JFrame{
 			else if(key.getKeyCode() == KeyEvent.VK_I){
 				if(mode == 0){
 					setMode(4);
+				}
+			}
+			else if(key.getKeyCode() == KeyEvent.VK_S){
+				if(mode == 0){
+					setMode(2);
 				}
 			}
 		}
