@@ -2,7 +2,7 @@ package Model;
 
 public class Player {
 	private int x;
-	public static final int PLAYER_Y = 610;
+	public static final int PLAYER_Y = 640;
 	public static final int P_WIDTH = 75;
 	public static final int P_HEIGHT = 119;
 	private int speed;
@@ -11,7 +11,7 @@ public class Player {
 	
 	public Player(){
 		x = 550;
-		speed = 20;
+		speed = 10;
 		cafBoost = 0;
 		awake = 0;
 	}
@@ -27,6 +27,18 @@ public class Player {
 		}
 		else if(x > 1200 - P_WIDTH){
 			x = 1200 - P_WIDTH;
+		}
+	}
+	
+	public void upgrade(int i) {
+		if(i == 0){
+			cafBoost += 20;
+		}
+		else if (i == 1){
+			speed += 3;
+		}
+		else if(i == 5){
+			awake++;
 		}
 	}
 	

@@ -8,15 +8,15 @@ import Items.*;
 
 public class Game extends Observable {
 	public static int BAR_WIDTH = 69;
-	ArrayList<Item> items;
-	Upgrade[] upgrades;
-	Random rand;
-	Player player;
-	int gifts;
-	int lvl;
-	int caf;
-	int counter;
-	int move;
+	private ArrayList<Item> items;
+	private Upgrade[] upgrades;
+	private Random rand;
+	private Player player;
+	private int gifts;
+	private int lvl;
+	private int caf;
+	private int counter;
+	private int move;
 
 	public Game() {
 		rand = new Random();
@@ -28,7 +28,7 @@ public class Game extends Observable {
 	}
 
 	public int updateGame(){
-		int speed = lvl * 10;
+		int speed = lvl * 5;
 		if(move == 1){
 			player.move(true);
 		}
@@ -58,7 +58,7 @@ public class Game extends Observable {
 		}
 		genItem();
 		counter++;
-		if (counter > 2) {
+		if (counter > 4) {
 			int temp = 1 + lvl - player.getAwake();
 			caf-= temp;
 			counter = 0;
@@ -67,6 +67,9 @@ public class Game extends Observable {
 			}
 			if (caf >= 737){
 				nextlvl();
+				if(lvl > 6){
+					return 2;
+				}
 				return 1;
 			}
 		}
@@ -77,7 +80,7 @@ public class Game extends Observable {
 	
 	private void nextlvl(){
 		lvl++;
-		caf = 50 + player.getCafBoost();
+		caf = 70 + player.getCafBoost();
 		counter = 0;
 		move = 0;
 		items = new ArrayList<Item>();
@@ -89,17 +92,53 @@ public class Game extends Observable {
 	
 	private void genItem(){
 		int check = rand.nextInt(100);
-		if (check < 10) {
+		if (check < 5 || items.isEmpty()) {
 			Item temp;
 			check = rand.nextInt(100);
 			if (check < 5) {
 				temp = new Gift();
 			}
-			else if (check > 50) {
-				temp = new Coffee();
+			else if(upgrades[4].maxed() && check < 10){
+				temp = new Press();
+			}
+			else if(upgrades[3].maxed() && check < 15){
+				temp = new Mug();
+			}
+			else if(lvl > 5 && check > 95){
+				temp = new Text();
+			}
+			else if(lvl > 1 && check > 85){
+				temp = new Blanket();
+			}
+			else if(lvl > 3 && check > 80){
+				temp = new Cap();
+			}
+			else if(lvl > 2 && check > 70){
+				temp = new Lullaby();
+			}
+			else if(lvl > 4 && check > 65){
+				temp = new Paper();
+			}
+			else if (check > 55) {
+				temp = new Pillow();
+			}
+			else if(lvl > 5 && check > 50){
+				temp = new Cream();
+			}
+			else if(lvl > 3 && check > 45){
+				temp = new Soda();
+			}
+			else if(lvl > 4 && check > 40){
+				temp = new Chocolate();
+			}
+			else if(lvl > 1 && check > 35){
+				temp = new Tea();
+			}
+			else if(lvl > 2 && check > 25){
+				temp = new Sugar();
 			}
 			else {
-				temp = new Pillow();
+				temp = new Coffee();
 			}
 			check = rand.nextInt(1200 - temp.getWidth() - BAR_WIDTH);
 			temp.setX(check + BAR_WIDTH);
@@ -109,10 +148,19 @@ public class Game extends Observable {
 	
 	private void setUpgrades(){
 		upgrades = new Upgrade[5];
+		upgrades[0] = new Upgrade(3, 4);
+		upgrades[1] = new Upgrade(2, 2);
+		upgrades[2] = new Upgrade(2, 5);
+		upgrades[3] = new Upgrade(1, 7);
+		upgrades[4] = new Upgrade(1, 15);
 	}
 	
 	public void buy(int b){
-		System.out.println("Buy upgrade " + b);
+		int temp = upgrades[b].buy(gifts);
+		if(b < 3 && temp < gifts){
+			player.upgrade(b);
+		}
+		gifts = temp;
 	}
 
 	public void move(int m) {
@@ -129,5 +177,21 @@ public class Game extends Observable {
 
 	public ArrayList<Item> getItems() {
 		return items;
+	}
+	
+	public int getGifts(){
+		return gifts;
+	}
+	
+	public boolean maxed(int upgrade){
+		return upgrades[upgrade].maxed();
+	}
+	
+	public int uCost(int upgrade){
+		return upgrades[upgrade].cost();
+	}
+	
+	public int getlvl(){
+		return lvl;
 	}
 }
