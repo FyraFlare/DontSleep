@@ -30,6 +30,18 @@ public class Player {
 		}
 	}
 	
+	public void upgrade(int i) {
+		if(i == 0){
+			cafBoost += 20;
+		}
+		else if (i == 1){
+			speed += 2;
+		}
+		else if(i == 2){
+			awake++;
+		}
+	}
+	
 	public int getX(){
 		return x;
 	}

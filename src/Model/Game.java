@@ -109,10 +109,19 @@ public class Game extends Observable {
 	
 	private void setUpgrades(){
 		upgrades = new Upgrade[5];
+		upgrades[0] = new Upgrade(3, 5);
+		upgrades[1] = new Upgrade(2, 4);
+		upgrades[2] = new Upgrade(2, 6);
+		upgrades[3] = new Upgrade(1, 2);
+		upgrades[4] = new Upgrade(1, 4);
 	}
 	
 	public void buy(int b){
-		System.out.println("Buy upgrade " + b);
+		int temp = upgrades[b].buy(gifts);
+		if(b < 3 && temp < gifts){
+			player.upgrade(b);
+		}
+		gifts = temp;
 	}
 
 	public void move(int m) {
